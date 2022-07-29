@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -10,13 +11,21 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     module: {
-        rules: {
+        rules: [
+        {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
             use: {
                 loader: 'babel-loader',
             }
+        },
+        {
+            test: /\.html$/,
+            use: [
+                {loader: 'html-loader'}
+            ]
         }
+    ]
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
